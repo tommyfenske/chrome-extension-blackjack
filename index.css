@@ -1,0 +1,65 @@
+body {
+    font-family: 'DotGothic16', sans-serif;
+    background: black;
+    background-size: cover;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    margin: 5% auto;
+}
+
+#header {
+    font-size: 60px;
+    border-bottom: 5px solid ;
+    margin: 10px;
+}
+
+#game-area {
+    display: inline-flex;
+    flex-direction: column;
+    background: darkgreen;
+    border: 10px double goldenrod;
+    align-items: center;
+    padding: 0 10px;
+}
+
+h1 {
+    font-size: 35px;
+}
+
+h3 {
+    text-decoration: underline;
+}
+
+button {
+    color: black;
+    width: 150px;
+    font-family: 'DotGothic16', sans-serif;
+    background: goldenrod;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-weight: bold;
+    border: 3px solid black;
+    border-radius: 2px;
+}
+
+button:hover {
+    color: white;
+    background: black;
+    border: 3px solid goldenrod;
+}
+
+.player-dealer-stats {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.stat-container {
+    display: inline-flex;
+    flex-direction: column;
+    width: 150px;
+    border: 10px double black; 
+    margin: 10px 10px;
+    padding: 0 20px;
+}

@@ -1,0 +1,37 @@
+<html>
+    <head><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
+        <link rel="stylesheet" href="index.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <div id="game-area">
+            <h1 id="header">BLACKJACK</h1>
+            <h1 id="message-el">Want to play a round?</h1>      
+                       
+            <div class="player-dealer-stats">
+                <div class="stat-container">
+                    <h3 id="title-el">Player</h3>
+                    <p id="cards-el">Cards:</p>
+                    <p id="sum-el">Sum:</p>
+                </div>
+                    
+                <div class="stat-container">
+                    <h3>Dealer</h3>
+                    <p id="dealer-cards-el">Cards:</p>
+                    <p id="dealer-sum-el">Sum:</p>
+                </div>
+            </div>
+            
+            <div id="button-container">
+                <button onclick="startGame()">START GAME</button>
+                <button onclick="newCard()">NEW CARD</button>
+                <button onclick="dealerTurn()">STAY</button>
+            </div>
+            
+             <p id="player-el"></p>
+        </div>
+        <script src="index.js"></script>
+    </body>
+</html>

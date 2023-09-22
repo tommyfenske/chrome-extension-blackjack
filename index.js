@@ -16,6 +16,76 @@ let cardsEl = document.getElementById("cards-el")
 let dealerCardsEl = document.getElementById("dealer-cards-el")
 let playerEl = document.getElementById("player-el")
 let titleEl = document.getElementById("title-el")
+let startBtn = document.getElementById("start-btn")
+let newCardBtn = document.getElementById("new-card-btn")
+let stayBtn = document.getElementById("stay-btn")
+
+//button event listeners
+startBtn.addEventListener("click", function(){
+    //STARTGAME
+    isAlive = true
+    //create deck of cards
+    createDeck()
+    
+    //reset stats
+    isAlive = true
+    hasBlackJack = false
+    
+    //assign player cards
+    let firstCard = getRandomCard()
+    let secondCard = getRandomCard()
+    cards = [firstCard, secondCard]
+    sum = firstCard + secondCard
+    
+    //assign dealer card
+    let firstDealerCard = getRandomCard()
+    dealerCards = [firstDealerCard]
+    updateDealerSum()
+    
+    renderGame()
+})
+
+newCardBtn.addEventListener("click", function(){
+    //NEWCARD
+    if (isAlive === true && hasBlackJack === false) {
+        let card = getRandomCard()
+        sum += card
+        cards.push(card)
+        renderGame()        
+    }
+})
+
+stayBtn.addEventListener("click", function() {
+    //DEALERTURN
+    if (isAlive) {
+        isAlive = false
+        
+        //dealer AI
+        while (dealerSum <= 16) {
+            let card = getRandomCard()
+            dealerCards.push(card)
+            updateDealerSum()
+            //check for aces
+            if (dealerSum > 21 && dealerCards.findIndex(findAce) != -1) {
+                dealerCards.splice(cards.findIndex(findAce), 1, 1)
+            }
+            updateDealerSum()
+            renderGame()
+        }
+        
+        //check result
+        if (dealerSum > 21) {
+            message = "Dealer busts, Player wins!"
+        } else if (sum > dealerSum) {
+            message = "Player wins!"
+        } else if (sum == dealerSum) {
+            message = "Push."
+        } else if (sum < dealerSum) {
+            message = "Dealer wins!"
+        }
+        messageEl.textContent = message
+    }
+})
 
 function getRandomCard() {
     let cardIndex = Math.floor( Math.random() * deck.length )
@@ -30,29 +100,7 @@ function getRandomCard() {
     }
 }
 
-function startGame() {
-    sum = 0
-    dealerSum = 0
-    //create deck of cards
-    createDeck()
-    
-    //reset stats
-    isAlive = true
-    hasBlackJack = false
-    
-    //assign player cards
-    let firstCard = getRandomCard()
-    let secondCard = getRandomCard()
-    cards = [firstCard, secondCard]
-    updateSum()
-    
-    //assign dealer card
-    let firstDealerCard = getRandomCard()
-    dealerCards = [firstDealerCard]
-    updateDealerSum()
-    
-    renderGame()
-}
+
 
 function createDeck() {
     deck = []
@@ -127,42 +175,4 @@ function updateDealerSum() {
         dealerSum += dealerCards[i]
     }
     dealerSumEl.textContent = "Sum: " + dealerSum
-}
-
-function newCard() {
-    if (isAlive === true && hasBlackJack === false) {
-        let card = getRandomCard()
-        cards.push(card)
-        updateSum()
-        renderGame()        
-    }
-}
-
-function dealerTurn() {
-    isAlive = false
-    
-    //dealer AI
-    while (dealerSum <= 16) {
-        let card = getRandomCard()
-        dealerCards.push(card)
-        updateDealerSum()
-        //check for aces
-        if (dealerSum > 21 && dealerCards.findIndex(findAce) != -1) {
-            dealerCards.splice(cards.findIndex(findAce), 1, 1)
-            updateDealerSum()
-        }
-        renderGame()
-    }
-    
-    //check result
-    if (dealerSum > 21) {
-        message = "Dealer busts, Player wins!"
-    } else if (sum > dealerSum) {
-        message = "Player wins!"
-    } else if (sum == dealerSum) {
-        message = "Push."
-    } else if (sum < dealerSum) {
-        message = "Dealer wins!"
-    }
-    messageEl.textContent = message
 }
